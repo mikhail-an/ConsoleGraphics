@@ -5,7 +5,6 @@
 //  Created by Mike An on 06.07.2022.
 //
 
-#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -41,13 +40,13 @@ int getScreenSize(void) {
 }
 
 char pifa(struct d2 a, struct d2 b, int len) {
-    char cc[] = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "; // 0 - 69
-    char c[]  = "@%#*+=-:. "; // 0 - 9
+    char c[]  = "@=-. ";
+    unsigned short int clen = sizeof(c) / sizeof(c[0]) - 2;
     float pifalen = sqrt((a.x-b.x)*(a.x-b.x)/aspect/rescale + (a.y-b.y)*(a.y-b.y)/rescale);
     
-    if(pifalen > (float)len) return c[9]; // do not draw anythink
+    if(pifalen > (float)len) return c[clen]; // do not draw anythink
                                             /* else draw gradient */
-    float step = (float)len/9.0f;
+    float step = (float)len/clen;
     int index = (int)round(pifalen/step);
     return c[index] ;
 }
